@@ -24,10 +24,11 @@ pipeline {
                  echo 'Empty'
             }
         }
+        489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test
         stage('Deploy') {
             steps {
                 script{
-                        docker.withRegistry('https://720766170633.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
+                        docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test', 'ecr:us-west-1:aws-credentials') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
