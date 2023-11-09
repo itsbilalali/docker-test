@@ -6,31 +6,32 @@ pipeline {
     stages {
          stage('Clone repository') { 
             steps { 
-                script{
-                checkout scm
+                script {
+                    checkout scm
                 }
             }
         }
 
         stage('Build') { 
             steps { 
-                script{ 
-                 app = docker.build("-f ./Dockerfile")
+                script { 
+                    app = docker.build("-f ./Dockerfile")
                 }
             }
         }
-        stage('Test'){
+
+        stage('Test') {
             steps {
-                 echo 'Empty'
+                echo 'Empty'
             }
         }
-        489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test
+
         stage('Deploy') {
             steps {
-                script{
-                        docker.withRegistry('489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test', 'ecr:us-west-1:aws-credentials') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
+                script {
+                    docker.withRegistry('489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test', 'ecr:us-west-1:aws-credentials') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
                     }
                 }
             }
