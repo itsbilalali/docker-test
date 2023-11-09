@@ -15,7 +15,7 @@ pipeline {
         stage('Build') { 
             steps { 
                 script { 
-                    app = docker.build("${DOCKER_IMAGE}:${TAG}")
+                    app = docker.build("nginx:latest")
                 }
             }
         }
