@@ -4,7 +4,7 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-         stage('Clone repository') { 
+        stage('Clone repository') { 
             steps { 
                 script {
                     checkout scm
@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.withRegistry('489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-test', 'ecr:us-west-1:aws-creds') {
+                    docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:aws-creds') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
