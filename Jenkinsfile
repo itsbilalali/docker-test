@@ -31,9 +31,7 @@ pipeline {
                 script {
                     
                     docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-erc-repo', 'ecr:us-west-1:aws-creds') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
-
+                    docker.image(app).push()
                         }
                     }
             }
