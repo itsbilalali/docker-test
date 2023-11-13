@@ -30,8 +30,7 @@ pipeline {
             steps {
                 script {
                     
-                    docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com/bilal-erc-repo', 'ecr:us-west-1:aws-creds') {
-                        app.tag("latest", "bilal-erc-repo:latest")
+                    docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com/nginx', 'ecr:us-west-1:aws-creds') {
                         app.push("latest")
 
                         }
