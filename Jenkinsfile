@@ -12,13 +12,10 @@ pipeline {
             }
         }
 
-        stage('Build') { 
-            steps { 
-                script { 
-                    // Get the short commit hash (first 5 characters)
-                    def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    
-                    // Build Docker image with the commit id as the tag
+        stage('Build') {
+            steps {
+                script {
+                    commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                     app = docker.build("nginx:${commitId}")
                 }
             }
