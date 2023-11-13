@@ -20,7 +20,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Testing') {
             steps {
                 echo 'Empty'
             }
