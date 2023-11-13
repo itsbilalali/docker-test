@@ -15,7 +15,11 @@ pipeline {
         stage('Build') { 
             steps { 
                 script { 
-                    app = docker.build("nginx:latest")
+                    // Get the short commit hash (first 5 characters)
+                    def commitId = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    
+                    // Build Docker image with the commit id as the tag
+                    app = docker.build("nginx:${commitId}")
                 }
             }
         }
@@ -29,12 +33,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    
+                    // Push the Docker image with the commit id as the tag
                     docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com/nginx', 'ecr:us-west-1:aws-creds') {
-                        app.push("latest")
-
-                        }
+                        app.push("${commitId}")
                     }
+                }
             }
         }
     }
