@@ -32,7 +32,8 @@ pipeline {
                     docker.withRegistry('https://489994096722.dkr.ecr.us-west-1.amazonaws.com', 'ecr:us-west-1:aws-creds') {
                         sh 'docker tag nginx:latest 489994096722.dkr.ecr.us-west-1.amazonaws.com/nginx:11'
                         app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                        app.push("latest") 
+                        }
                     }
             }
         }
